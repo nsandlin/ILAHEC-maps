@@ -1,0 +1,92 @@
+[
+  {
+    "Region": "CH",
+    "Center": "Chicago AHEC",
+    "Includes": "40 community areas",
+    "Includes2": "North and west Chicago, downtown and portions of the near south side",
+    "Host": "Health & Medicine Policy Research Group",
+    "Contact": "Melissa Martin",
+    "Link": "https://ilahec.uic.edu/regional-centers/ch/",
+    "Color": "#c8202f"
+  },
+  {
+    "Region": "CI",
+    "Center": "Central Illinois AHEC",
+    "Includes": "16 counties",
+    "Includes2": "Christian, Dewitt, Logan, Macon, Macoupin, Marshall, McLean, Menard, Morgan, Moultrie, Montgomery, Peoria, Piatt, Sangamon, Tazewell, Woodford",
+    "Host": "Illinois State University, Normal",
+    "Contact": "Sharon Mills",
+    "Link": "https://ilahec.uic.edu/regional-centers/ci/",
+    "Color": "#6d2780"
+  },
+  {
+    "Region": "CS",
+    "Center": "Chicago South AHEC",
+    "Includes": "37 community areas",
+    "Includes2": "South and southwest Chicago and near south suburbs",
+    "Host": "Project Brotherhood",
+    "Contact": "Marcus Murray",
+    "Link": "https://ilahec.uic.edu/regional-centers/cs/",
+    "Color": "#f78800"
+  },
+  {
+    "Region": "EC",
+    "Center": "East Central AHEC",
+    "Includes": "12 counties",
+    "Includes2": "Champaign, Clark, Coles, Cumberland, Douglas, Edgar, Ford, Iroquois, Kankakee, Livingston, Shelby, Vermillion",
+    "Host": "Gibson Area Health and Hospital Services, Gibson City",
+    "Contact": "Eileen Woolums",
+    "Link": "https://ilahec.uic.edu/regional-centers/ec/",
+    "Color": "#098cd9"
+  },
+  {
+    "Region": "NE",
+    "Center": "Northeast AHEC",
+    "Includes": "8 counties",
+    "Includes2": "DuPage, Grundy, Kane, Kendall, Lake, McHenry, Will, part of Cook",
+    "Host": "TBA",
+    "Contact": "Judith Sayad",
+    "Link": "https://ilahec.uic.edu/regional-centers/ne/",
+    "Color": "#8dc73f"
+  },
+  {
+    "Region": "NW",
+    "Center": "Northwest AHEC",
+    "Includes": "14 counties",
+    "Includes2": "Boone, Bureau, Carroll, DeKalb, Henry, Jo Daviess, LaSalle, Lee, Ogle, Putnam, Stark, Stephenson, Winnebago, Whiteside",
+    "Host": "Katherine Shaw Bethea Hospital, Dixon",
+    "Contact": "Teresa Strum",
+    "Link": "https://ilahec.uic.edu/regional-centers/nw/",
+    "Color": "#224096"
+  },
+  {
+    "Region": "SC",
+    "Center": "South Central AHEC",
+    "Includes": "16 counties",
+    "Includes2": "Bond, Clinton, Effingham, Fayette, Franklin, Jackson, Jefferson, Jersey, Madison, Marion, Monroe, Perry, Randolph, St. Clair, Union, Washington",
+    "Host": "SSM Health System, Mt. Vernon",
+    "Contact": "Kayla Dunahee",
+    "Link": "https://ilahec.uic.edu/regional-centers/sc/",
+    "Color": "#6738"
+  },
+  {
+    "Region": "SE",
+    "Center": "Southeast AHEC",
+    "Includes": "19 counties",
+    "Includes2": "Alexander, Clay, Crawford, Edwards, Gallatin, Hamilton, Hardin, Jasper, Johnson, Lawrence, Massac, Pope, Pulaski, Richland, Saline, Wabash, Wayne, White, Williamson",
+    "Host": "Fairfield Memorial Hospital, Fairfield",
+    "Contact": "Kristi Howell",
+    "Link": "https://ilahec.uic.edu/regional-centers/se/",
+    "Color": "#d0b202"
+  },
+  {
+    "Region": "WC",
+    "Center": "West Central AHEC",
+    "Includes": "17 counties",
+    "Includes2": "Adams, Brown, Calhoun, Cass, Fulton, Greene, Hancock, Henderson, Knox, Mason, McDonough, Mercer, Pike, Rock Island, Schulyer, Scott, Warren",
+    "Host": "Memorial Hospital, Carthage",
+    "Contact": "Mary Jane Clark",
+    "Link": "https://ilahec.uic.edu/regional-centers/wc/",
+    "Color": "#e75480"
+  }
+]

@@ -1,0 +1,9 @@
+color-CH-dark-red-c8202f-(200,32,47).jpg
+color-CI-purple-6d2780-(109,39,128).jpg
+color-CS-dark-orange-f78800-(247,136,0).png
+color-EC-bright-blue-098cd9-(9,140,217).jpg
+color-NE-bright-green-8dc73f-(141,199,63).jpg
+color-NW-dark-blue-224096-(34,64,150).jpg
+color-SC-dark-green-006738-(0,103,56).jpg
+color-SE-dark-yellow-d0b202-(208,178,2).jpg
+color-WC-dark-pink-e75480-(231,84,128).jpg
