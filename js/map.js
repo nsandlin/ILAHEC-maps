@@ -6,15 +6,27 @@ function loadBoundaryData(map_selector, geojson_files) {
 		bounds = map[map_selector].getBounds().toBBoxString();
 	}
 	
+	// Create a layerGroup for all of the background layers (one per feature) we'll be creating later
+	background_layers = L.layerGroup();
+	layers = [];
+	items = [];
+	
+	// For each of the files given, add it to the map
 	$.each(geojson_files, function(i, v) {
 		console.log(v);
 		$.getJSON(v.url)
-	    .done(function( data ) {		    
+	    .done(function( data ) {
+		    // Sort the data
+		    data.features.sort(propSort(["name"]));
+		    //data.features.sort(sort_by('properties[name]', false, (a) => a.toUpperCase() ));
+		    //data.features.sort(sortByName);
+		    	    
 		    // Empty any existing feature
 			if(typeof geojsonLayer === "object") {
 				geojsonLayer.clearLayers();
 			}
 		    
+		    // Create a single GeoJSON layer for this data
 			geojsonLayer = L.geoJson(data, {
 				style: function(feature) {
 					return setFeatureStyle(feature);
@@ -36,6 +48,30 @@ function loadBoundaryData(map_selector, geojson_files) {
 	});
 }
 
+function createLegend(map_selector, position) {
+	// Sort the array of items
+	items.sort();
+	
+	// Create the <select> list of options, derived from the GeoJSON file
+	var select = "<select id='items' style='font-size: 2.5em;' onchange=\"zoomToFeature('map', $('#items').val() );\"><option>Choose a county</option></select>";
+	
+	// Create the legend (this has to happen inside .done, because .done is asynchronous
+	var legend = L.control({position: position});
+	legend.onAdd = function (map) {
+	    var div = L.DomUtil.create('div', 'info legend');
+	    div.innerHTML = select;
+	    div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
+	    return div;
+	};
+	legend.addTo(map[map_selector]);
+	
+	//map["map"].fitBounds(layers["Kankakee"].layer.getBounds())
+}
+
+function zoomToFeature(map_selector, feature_name) {
+	map["map"].fitBounds(layers[feature_name].layer.getBounds())
+}
+
 function onEachFeature(feature, layer, map_selector) {
 	var p = feature.properties;
 	
@@ -45,6 +81,17 @@ function onEachFeature(feature, layer, map_selector) {
 	var description = "<p><b>" + p.region + " region</b><br />" + p.name + " County</p><p>Center: " + info.Center + "</p>";
 
     layer.bindPopup(description);
+    
+    // create a background GeoJSON layer for this feature
+	//var layer = L.geoJSON(feature.geometry);
+	//background_layers.addLayer(layer); 
+	layers[p.name] = {
+		layer: layer,
+		name: p.name
+	} // give this layer an identifiable name, so we can zoom to it later
+	items.push(p.name);
+	
+	$("#items").append("<option>" + p.name + "</option>");
 }
 
 function getDetailedRegionInfo(region) {
@@ -198,4 +245,24 @@ function setFeatureStyle(feature) {
 	style.color = color;
 
 	return style;
+}
+
+function propSort(props) {
+  if (!props instanceof Array) props = props.split(",");
+  return function sort(a, b) {
+    var p;
+    a = a.properties;
+    b = b.properties;
+    for (var i = 0; i < props.length; i++) {
+      p = props[i];
+      if (typeof a[p] === "undefined") return -1;
+      if (a[p] < b[p]) return -1;
+      if (a[p] > b[p]) return 1;
+    }
+    return 0;
+  };
+}
+
+function sortByName(a,b) {
+    return (a.properties.name.toUpperCase() < b.properties.name.toUpperCase()) ? -1 : ((a.properties.name.toUpperCase() > b.properties.name.toUpperCase()) ? 1 : 0);
 }
