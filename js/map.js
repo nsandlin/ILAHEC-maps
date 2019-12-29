@@ -53,7 +53,7 @@ function createLegend(map_selector, position) {
 	items.sort();
 	
 	// Create the <select> list of options, derived from the GeoJSON file
-	var select = "<select id='items' style='font-size: 2.5em;' onchange=\"zoomToFeature('map', $('#items').val() );\"><option>Choose a county</option></select>";
+	var select = "<select id='items' style='font-size: 3em;' onchange=\"zoomToFeature('map', $('#items').val() );\"><option>Choose a county</option></select>";
 	
 	// Create the legend (this has to happen inside .done, because .done is asynchronous
 	var legend = L.control({position: position});
@@ -95,7 +95,7 @@ function onEachFeature(feature, layer, map_selector) {
 }
 
 function getDetailedRegionInfo(region) {
-	console.log("getDetailedRegionInfo: region `" + region + "` requested");
+	//console.log("getDetailedRegionInfo: region `" + region + "` requested");
 	
 	info = {
 	  CH: {
