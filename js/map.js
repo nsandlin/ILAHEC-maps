@@ -69,7 +69,11 @@ function createLegend(map_selector, position) {
 }
 
 function zoomToFeature(map_selector, feature_name) {
-	map["map"].fitBounds(layers[feature_name].layer.getBounds())
+	// Zoom to the feature
+	map["map"].fitBounds(layers[feature_name].layer.getBounds());
+	
+	// Also, show the feature's popup window
+	layers[feature_name].layer.togglePopup();
 }
 
 function onEachFeature(feature, layer, map_selector) {
