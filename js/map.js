@@ -16,6 +16,9 @@ function loadBoundaryData(map_selector, geojson_files) {
 		console.log(v);
 		$.getJSON(v.url)
 	    .done(function( data ) {
+		    // Show the county selector
+		    $("#items").show();
+		    
 		    // Sort the data
 		    data.features.sort(propSort(["name"]));
 		    //data.features.sort(sort_by('properties[name]', false, (a) => a.toUpperCase() ));
@@ -65,7 +68,8 @@ function createLegend(map_selector, position) {
 	};
 	legend.addTo(map[map_selector]);
 	
-	//map["map"].fitBounds(layers["Kankakee"].layer.getBounds())
+	// Hide the selector (we will show it once its populated)
+	$("#items").hide();
 }
 
 function zoomToFeature(map_selector, feature_name) {
