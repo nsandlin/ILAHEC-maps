@@ -56,7 +56,7 @@ function createLegend(map_selector, position) {
 	items.sort();
 	
 	// Create the <select> list of options, derived from the GeoJSON file
-	var select = "<select id='items' style='font-size: 3em;' onchange=\"zoomToFeature('map', $('#items').val() );\"><option>Choose a county</option></select>";
+	var select = "<select id='items' onchange=\"zoomToFeature('map', $('#items').val() );\"><option>Choose a county</option></select>";
 	
 	// Create the legend (this has to happen inside .done, because .done is asynchronous
 	var legend = L.control({position: position});
@@ -86,7 +86,8 @@ function onEachFeature(feature, layer, map_selector) {
 	var info = getDetailedRegionInfo(p.region); // returns an object
 	
 	// Using HTML, create a description that you want to appear when someone clicks on a county
-	var description = "<p><b>" + p.region + " region</b><br />" + p.name + " County</p><p>Center: " + info.Center + "</p>";
+	var description = "<p><b>" + info.Center + "</b><br /><br /><b>" + info.Includes + ":</b> " + info.Includes2 + "<br /><br /><b>Host:</b> " + info.Host + "</b><br /><br />";
+	   description += "<b>Contact:</b> " + info.Contact + '<br /><a href=\"' + info.Link + '\" target=\"_blank\">' + info.Link + '</a></p>';
 
     layer.bindPopup(description);
     
