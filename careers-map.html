@@ -38,32 +38,35 @@
 	
   // load GeoJSON regions from an external file
   $.getJSON("data/combined.geojson",function(mData){
-    L.geoJson( mData  , {
-      style: function(feature){
-        var fillColor,
-            m = feature.properties.region;
-        if ( m == 'CH' ) fillColor = "#c8202f";
-        if ( m == 'CI' ) fillColor = "#6d2780";
-        if ( m == 'CS' ) fillColor = "#f78800";
-        if ( m == 'EC' ) fillColor = "#098cd9";
-        if ( m == 'NE' ) fillColor = "#8dc73f";
-        if ( m == 'NW' ) fillColor = "#224096";
-        if ( m == 'SC' ) fillColor = "#006738";
-        if ( m == 'SE' ) fillColor = "#d0b202";
-        if ( m == 'WC' ) fillColor = "#e75480";
-        else fillColor == "#fff";  // no data
-        return { color: "#eee", weight: 3, fillColor: fillColor, fillOpacity: .7 };
-      },
-      onEachFeature: function( feature, layer ){
-        cty = feature.properties.name;
-        layer.bindPopup( cty + " County" )
-      }
-    }
-  ).addTo(map);
+	    var regionsLayer = L.geoJson( mData  , {
+	      style: function(feature){
+	        var fillColor,
+	            m = feature.properties.region;
+	        if ( m == 'CH' ) fillColor = "#c8202f";
+	        if ( m == 'CI' ) fillColor = "#6d2780";
+	        if ( m == 'CS' ) fillColor = "#f78800";
+	        if ( m == 'EC' ) fillColor = "#098cd9";
+	        if ( m == 'NE' ) fillColor = "#8dc73f";
+	        if ( m == 'NW' ) fillColor = "#224096";
+	        if ( m == 'SC' ) fillColor = "#006738";
+	        if ( m == 'SE' ) fillColor = "#d0b202";
+	        if ( m == 'WC' ) fillColor = "#e75480";
+	        else fillColor == "#fff";  // no data
+	        return { color: "#eee", weight: 3, fillColor: fillColor, fillOpacity: .7 };
+	      },
+	      onEachFeature: function( feature, layer ){
+	        cty = feature.properties.name;
+	        layer.bindPopup( cty + " County" )
+	      }
+	    }
+	  ).addTo(map);
+	  
+	  // Send the county/region boundary layer to the back (in case it went to the front)
+	  regionsLayer.bringToBack();
   });
   
   $.getJSON("data/hospitals.geojson",function(hData){
-  L.geoJson( hData  , {
+  	var hospitalsLayer = L.geoJson( hData  , {
       style: function(feature){
         return {
         	color: "#000",
@@ -100,6 +103,7 @@
     }
     }
   ).addTo(map);
+  
   
   });
 
