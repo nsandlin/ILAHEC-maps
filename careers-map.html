@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ILAHEC employer links map</title>
+<!--HEAD-->
+<meta charset='utf-8' />
+<!--share buttons-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<style>
+  #map { height: 700px;  width: 100%;}
+</style>
+</head>
+
+<body>
+  <div id="map-box">
+    <div id='map'>
+    </div>
+  </div><!--map-box-->
+
+
+
+  <script>
+  // initialize the map 39.90, -89.40
+	var map = L.map('map').setView([39.90, -89.40], 7);
+
+	map.createPane("pane250").style.zIndex = 250;
+	map.createPane("pane800").style.zIndex = 800;
+
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibnNhbmRsaW4iLCJhIjoiWjlPR1JmTSJ9.mxD2778HVDBJDvZVI4H6EQ', {
+		maxZoom: 18,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox.light'
+	}).addTo(map);
+	
+  // load GeoJSON regions from an external file
+  $.getJSON("data/combined.geojson",function(mData){
+    L.geoJson( mData  , {
+      style: function(feature){
+        var fillColor,
+            m = feature.properties.region;
+        if ( m == 'CH' ) fillColor = "#c8202f";
+        if ( m == 'CI' ) fillColor = "#6d2780";
+        if ( m == 'CS' ) fillColor = "#f78800";
+        if ( m == 'EC' ) fillColor = "#098cd9";
+        if ( m == 'NE' ) fillColor = "#8dc73f";
+        if ( m == 'NW' ) fillColor = "#224096";
+        if ( m == 'SC' ) fillColor = "#006738";
+        if ( m == 'SE' ) fillColor = "#d0b202";
+        if ( m == 'WC' ) fillColor = "#e75480";
+        else fillColor == "#fff";  // no data
+        return { color: "#eee", weight: 3, fillColor: fillColor, fillOpacity: .7 };
+      },
+      onEachFeature: function( feature, layer ){
+        cty = feature.properties.name;
+        layer.bindPopup( cty + " County" )
+      }
+    }
+  ).addTo(map);
+  });
+  
+  $.getJSON("data/hospitals.geojson",function(hData){
+  L.geoJson( hData  , {
+      style: function(feature){
+        return {
+        	color: "#000",
+        	fillColor: "#fff",
+        	weight: "2"
+        };
+     },
+    pointToLayer: function(feature, latlng) {
+        return new L.CircleMarker(latlng, {
+        	radius: 3, 
+        	fillOpacity: 1,
+        });
+    },
+    onEachFeature: function( feature, layer ){
+        f = feature.properties.Facility;
+        a = feature.properties.Address;
+        cit = feature.properties.City;
+        co = feature.properties.County;
+        z = feature.properties.Zip;
+        ph = feature.properties.Phone;
+        main = feature.properties.Main;
+        jobs = feature.properties.Jobs;
+        vol = feature.properties.Volunteering;
+        t = feature.properties.Type;
+        r = feature.properties.Region;
+        
+        popup = "<p><b>" + f + "</b><br>" + a + ", " + cit + " IL " + z + "<br>" + ph;
+        popup += '<br><a href=\"' + main + '\" target=\"_blank\">' + main + '</a>';
+        popup += "<br><b>Type:</b> " + t + " <b>County:</b> " + co;
+        popup += "<br><b>Careers:</b> " + '<a href=\"' + jobs + '\" target=\"_blank\">' + jobs + '</a>';
+        popup += "<br><b>Volunteering:</b> " + '<a href=\"' + vol + '\" target=\"_blank\">' + vol + '</a></p>';
+        
+        layer.bindPopup(popup)
+    }
+    }
+  ).addTo(map);
+  
+  });
+
+  </script>
+
+</body>
+</html>
