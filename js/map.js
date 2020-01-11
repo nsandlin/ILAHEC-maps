@@ -51,7 +51,7 @@ function loadBoundaryData(map_selector, geojson_files) {
 	});
 }
 
-function createLegend(map_selector, position) {
+function createCountySelector(map_selector, position) {
 	// Sort the array of items
 	items.sort();
 	
