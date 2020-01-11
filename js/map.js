@@ -46,7 +46,7 @@ function loadBoundaryData(map_selector, geojson_files) {
 			}
 	    })
 	    .fail(function() {
-		    console.log("loadBoundaryData: couldn't load data for method " + method);
+		    console.log("loadBoundaryData: couldn't load file " + v.url);
 		});
 	});
 }
