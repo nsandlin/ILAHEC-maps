@@ -4,6 +4,7 @@
       <title>ILAHEC map</title>
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
 	  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+	  <link rel="stylesheet" type="text/css" href="styles.css">
       <style>
       #map {height: 700px; width: 100%;}
       </style>
@@ -39,6 +40,7 @@
          
          // Add the GeoJSON data to the map (this function can handle multiple GeoJSON files)
          loadBoundaryData("map", [{url: "data/combined.geojson"}]);
+         createLegend("map", "bottomleft");
          //createCountySelector(map_selector, "topright");
       </script>
    </body>

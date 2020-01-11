@@ -72,6 +72,18 @@ function createCountySelector(map_selector, position) {
 	$("#items").hide();
 }
 
+function createLegend(map_selector, position) {
+	var html = "<div class='legend-box'><ul class='legend-labels'><li><span style='background:#c8202f; opacity: 0.7;'>CHICAGO</span></li><li><span style='background:#6d2780; opacity: 0.7;'>CENTRAL ILLINOIS</span></li><li><span style='background:#f78800; opacity: 0.7;'>CHICAGO SOUTH</span></li><li><span style='background:#098cd9; opacity: 0.7;'>EAST CENTRAL</span></li><li><span style='background:#8dc73f; opacity: 0.7;'>NORTHEAST</span></li><li><span style='background:#224096; opacity: 0.7;'>NORTHWEST</span></li><li><span style='background:#006738; opacity: 0.7;'>SOUTH CENTRAL</span></li><li><span style='background:#d0b202; opacity: 0.7;'>SOUTHEAST</span></li><li><span style='background:#e75480; opacity: 0.7;'>WEST CENTRAL</span></li></ul></div>";
+	
+	// Create the legend
+	var legend = L.control({position: position});
+	legend.onAdd = function (map) {
+	    var div = L.DomUtil.create('div', 'info legend');
+	    div.innerHTML = html;
+	    return div;
+	};
+	legend.addTo(map[map_selector]);
+}
 function zoomToFeature(map_selector, feature_name) {
 	// Zoom to the feature
 	//map["map"].fitBounds(layers[feature_name].layer.getBounds());
