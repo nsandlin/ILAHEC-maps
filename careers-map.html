@@ -25,9 +25,6 @@
   // initialize the map 39.90, -89.40
 	var map = L.map('map').setView([39.90, -89.40], 7);
 
-	map.createPane("pane250").style.zIndex = 250;
-	map.createPane("pane800").style.zIndex = 800;
-
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibnNhbmRsaW4iLCJhIjoiWjlPR1JmTSJ9.mxD2778HVDBJDvZVI4H6EQ', {
 		maxZoom: 18,
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -76,7 +73,7 @@
      },
     pointToLayer: function(feature, latlng) {
         return new L.CircleMarker(latlng, {
-        	radius: 4, 
+        	radius: 5, 
         	fillOpacity: 0.85,
         });
     },
@@ -92,21 +89,39 @@
         vol = feature.properties.Volunteering;
         t = feature.properties.Type;
         r = feature.properties.Region;
+        vlink = "";
+        if (vol != null) {vlink = "<br><b>Volunteering:</b> " + '<a href=\"' + vol + '\" target=\"_blank\">' + vol + '</a>';}
         
         popup = "<p><b>" + f + "</b><br>" + a + ", " + cit + " IL " + z + "<br>" + ph;
-        popup += '<br><a href=\"' + main + '\" target=\"_blank\">' + main + '</a>';
-        popup += "<br><b>Type:</b> " + t + " <b>County:</b> " + co;
+        popup += '<br><a href=\"' + main + '\" target=\"_blank\">' + main + '</a><br>';
+        popup += "<br><b>Type:</b> " + t + " \&nbsp\;\&bull\;\&nbsp\; <b>County:</b> " + co;
         popup += "<br><b>Careers:</b> " + '<a href=\"' + jobs + '\" target=\"_blank\">' + jobs + '</a>';
-        popup += "<br><b>Volunteering:</b> " + '<a href=\"' + vol + '\" target=\"_blank\">' + vol + '</a></p>';
+        popup += vlink;
+        popup += "<p>";
         
         layer.bindPopup(popup)
     }
     }
   ).addTo(map);
   
-  
-  });
+  function createLegend(map_selector, position) {
+  	var html = "<div class='legend-box'><ul class='legend-labels'><li><span style='background:#c8202f; opacity: 0.7;'>CHICAGO</span></li><li><span style='background:#6d2780; opacity: 0.7;'>CENTRAL ILLINOIS</span></li><li><span style='background:#f78800; opacity: 0.7;'>CHICAGO SOUTH</span></li><li><span style='background:#098cd9; opacity: 0.7;'>EAST CENTRAL</span></li><li><span style='background:#8dc73f; opacity: 0.7;'>NORTHEAST</span></li><li><span style='background:#224096; opacity: 0.7;'>NORTHWEST</span></li><li><span style='background:#006738; opacity: 0.7;'>SOUTH CENTRAL</span></li><li><span style='background:#d0b202; opacity: 0.7;'>SOUTHEAST</span></li><li><span style='background:#e75480; opacity: 0.7;'>WEST CENTRAL</span></li></ul></div>";
+  	
+  	// Create the legend
+  	var legend = L.control({position: position});
+  	legend.onAdd = function (map) {
+  	    var div = L.DomUtil.create('div', 'info legend');
+  	    div.innerHTML = html;
+  	    return div;
+  	};
+  	legend.addTo(map[map_selector]);
+  }
 
+  });
+  
+  // Adding layer to the map
+  map[map_selector].addLayer(layer);
+  createLegend("map", "bottomleft");
   </script>
 
 </body>
