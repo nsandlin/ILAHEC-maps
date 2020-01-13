@@ -26,6 +26,7 @@
   <script>
   // initialize the map 39.90, -89.40
 	var map = L.map('map').setView([39.90, -89.40], 7);
+	createLegend("map", "bottomleft");
 
 	map.createPane("pane250").style.zIndex = 250;
 	map.createPane("pane800").style.zIndex = 800;

@@ -82,7 +82,12 @@ function createLegend(map_selector, position) {
 	    div.innerHTML = html;
 	    return div;
 	};
-	legend.addTo(map[map_selector]);
+	
+	if(typeof map[map_selector] != "undefined") {
+		legend.addTo(map[map_selector]);	
+	} else {
+		legend.addTo(window[map_selector]);
+	}
 }
 function zoomToFeature(map_selector, feature_name) {
 	// Zoom to the feature
